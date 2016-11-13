@@ -1,0 +1,138 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	background:url("../imgs/bg-01.jpg") no-repeat fixed 0 10%;
+	
+}
+.container{
+	display: flex;
+	flex-direction: column;
+	min-height: 600px;
+	/*border:1px solid red;*/
+	margin-top: 2%
+}
+.header{
+	/*flex:0.1;*/
+	/*上下定宽，中间自适应*/
+	height:100px;
+	/*border:1px solid yellow;*/
+}
+.header span{
+	/*box-shadow: 4px 4px 4px #222;*/
+	font-style: italic;
+	text-shadow: 4px 4px 4px #222;
+}
+.hTitle{
+	font-size: 50px;
+	color:white;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+
+}
+.main{
+	display:flex;
+	flex:0.1 0.1 auto;
+	/*border:1px solid black;*/
+}
+.blog-main{
+	
+	flex:1;
+	/*border:1px dashed red;*/
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.content{
+	flex:0.9;
+	/*border:1px solid red;*/
+	background:white;
+	opacity:0.5;
+	filter:alpha(opacity=50); 
+	/*text-align: center;*/
+	box-shadow: 0px 0px 5px #222;
+	min-height: 600px;
+	position:relative;
+	
+}
+.content ul{
+	margin-top:3%;
+	float:left;
+	margin-left: 50px;
+}
+.content li{
+	list-style: none;
+
+	line-height:36px;
+	height:36px;
+	
+}
+.content li .itemTitle{
+	display: inline-block;
+	margin: 0 10px;
+}
+.liLinks{
+	position: absolute;
+	text-align: center;
+	left:50%;
+	width:100%;
+	bottom:10px;
+	transform:translateX(-50%);
+}
+.liLinks button{
+	margin:6px 6px;
+	width:60px;
+	height: 30px;
+}
+.active{
+	/*border-radius:2px;*/
+	border:none;
+	border-radius:3px;
+	background-color: rgb(152,152,152);
+}
+.liLinks .pagesContainer{
+	display: inline-block;
+}
+.content li a{
+	text-decoration:none;
+	color:#222;
+}
+.blog-aside{
+	/*border:1px dashed white;*/
+	flex:0 0 200px;
+	order:-1;
+}
+.blog-nav{
+	/*border:1px dashed white;*/
+	flex:0 0 200px;
+}
+.footer{
+	/*flex:0.1;*/
+	height:40px;
+	text-align: center;
+	padding-top:15px;
+	/*border:1px solid green;*/
+}
+
+
+
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    flex: 1;
+  }
+  .blog-main,.blog-aside,.blog-nav{
+    flex: auto;
+  }
+}
+
+
+
+
+
+
+.test{
+	transform:rotate(7deg); 
+}

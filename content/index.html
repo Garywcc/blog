@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>webpack</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header"><h1>webpack学习</h1>
+			<div class="links">
+				<a href="../index.html" class="returnMain">首页</a>
+				<a href="#" class="pre">上一篇</a>
+				<a href="#" class="next">下一篇</a>
+			</div>
+		</div>
+		<div class="context">
+			<p>关于webpack的介绍，大家可以去看官网<a href="http://webpack.github.io/">webpack</a>。</p>
+			<p>首先要说的是webpack.config.js配置文件，类似Gruntfiles.js文件，进行相关项目的配置。</p>
+			
+			<pre>
+				<code>
+		module.exports = {
+		    devtool: 'eval-source-map',//配置生成Source Maps，选择合适的选项
+		    entry:  __dirname + "/js/index.js",//已多次提及的唯一入口文件
+		    output: {
+		        path: __dirname + "/dist",//打包后的文件存放的地方
+		        filename: "index1.js"//打包后输出文件的文件名
+		  },
+		  devServer: {
+		    //contentBase: "./public",//本地服务器所加载的页面所在的目录，默认当前目录
+		    port:8080,
+		    colors: true,//终端中输出结果为彩色
+		    historyApiFallback: true,//不跳转
+		    inline: true//实时刷新
+		  },
+		  module: {//在配置文件里添加JSON loader
+		    loaders: [
+		      {
+		        test: /\.json$/,
+		        loader: "json"
+		      }
+		    ]
+		  }
+		}
+				</code>
+			</pre>
+			<p>1. <b>entry参数</b>定义了打包后的入口文件，可以是个字符串或数组或者是对象；如果是数组，数组中的模块会依次加载，返回最后一个文件；如果是对象，可以将不同的文件构建成不同的文件</p>
+			<p>2. <b>output参数</b>是个对象，定义了输出文件的位置及名字：<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;<strong>path:</strong> 打包文件存放的绝对路径<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;<strong>publicPath:</strong> 网站运行时的访问路径<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;<strong>filename:</strong>打包后的文件名<br>
+						注：在使用webpack-dev-server时生产的文件是放在内存中的，通过绝对路径引用css,js文件时会报404错误，此时可以将路径改为publicPath设置的路径。
+						<pre>
+							<code>
+		output: {
+			path: __dirname + "/test",//打包后的文件存放的地方
+			publicPath:"/test1/",
+			filename: "index.js"//打包后输出文件的文件名
+		}
+							</code>
+						</pre>
+					在html中可以引用
+					<pre>
+						<code>
+		&lt;script src="test1/index.js"&gt&lt;/script&gt
+						</code>
+					</pre>
+			</p>
+			<p>
+				3. <b>module参数</b>在webpack中JavaScript，CSS，LESS，TypeScript，JSX，CoffeeScript，图片等静态文件都是模块，不同模块的加载是通过模块加载器（webpack-loader）来统一管理的。loaders之间是可以串联的，一个加载器的输出可以作为下一个加载器的输入，最终返回到JavaScript上：
+				<pre>
+					<code>
+	module: {
+		loaders: [
+			//.css 文件使用 style-loader 和 css-loader 来处理
+			{ test: /\.css$/, loader: 'style-loader!css-loader' },
+
+			//.js 文件使用 jsx-loader 来编译处理
+			{ test: /\.js$/, loader: 'jsx-loader?harmony' },
+
+			//.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理
+			{ test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
+
+			//图片文件使用 url-loader 来处理，小于8kb的直接转为base64
+			{ test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+		]
+	}
+					</code>
+				</pre>
+				test项表示匹配的资源类型，loader项表示用来加载这种类型的资源的loader，！用来定义loader的串联关系，"-loader"是可以省略不写的，多个loader之间用“!”连接起来，但所有的加载器都需要通过 npm 来加载。<br>
+				注意，require()还支持在资源path前面指定loader，即require(![loaders list]![source path])形式：
+				<pre>
+					<code>
+	require("!style!css!less!bootstrap/less/bootstrap.less");
+		// “bootstrap.less”这个资源会先被"less-loader"处理，
+		// 其结果又会被"css-loader"处理，接着是"style-loader"
+					</code>
+				</pre>
+			</p>
+			<p>
+				4. <b>resolve属性</b>webpack在构建包的时候会按目录的进行文件的查找，resolve属性中的extensions数组中用于配置程序可以自行补全哪些文件后缀：
+				<pre>
+					<code>
+	resolve: {
+		//查找module的话从这里开始查找
+		root: '/gary/src', //绝对路径
+
+		//自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
+		extensions: ['', '.js', '.json', '.scss'],
+
+		//模块别名定义，方便后续直接引用别名，无须多写长长的地址
+		alias: {
+		AppStore : 'js/stores/AppStores.js',//后续直接 require('AppStore') 即可
+		ActionType : 'js/actions/ActionType.js',
+		AppAction : 'js/actions/AppAction.js'
+		}
+	}
+					</code>
+				</pre>
+			</p>
+			<p>
+				5. <b>plugin属性</b>尚未使用
+			</p>
+			<p>
+				6. <b>externals</b>当我们想在项目中require一些其他的类库或者API，而又不想让这些类库的源码被构建到运行时文件中，这在实际开发中很有必要。此时我们就可以通过配置externals参数来解决这个问题(具体没试用过)
+			</p>
+			<p>
+				还有一些其他属性由于暂时还没学到，待后续更新
+			</p>
+			<br>
+			<br>
+			
+			<p>
+				接下来是webpack-dev-server。webpack-dev-server 是一个基于 webpack-dev-middleware 和 Node Express 的 webpack 打包小型 Web 服务器。同时在运行时通过 socket.io 与服务器进行通信。由服务器将打包状态发送给客户端，而客户端监听这些信息并作出相应的变化 。在webpack.config.js下devServer进行配置
+				<pre>
+					<code>
+		devServer: {
+			//contentBase: "./public",//本地服务器所加载的页面所在的目录
+			port:8080,
+			colors: true,//终端中输出结果为彩色
+			historyApiFallback: true,//不跳转
+			inline: true//实时刷新
+		}
+					</code>
+				</pre>
+			</p>
+			<p>
+				1. <b>contentBase属性</b>指定本地服务器所加载的页面所在的目录，默认为当前目录
+			</p>
+			<p>
+				2. <b>port属性</b>指定端口号
+			</p>
+			<p>
+				3. <b>colors属性</b>设置为true，当源文件改变时会自动刷新页面
+			</p>
+			<p>
+				4. <b>inline属性</b>设置为true，使终端输出的文件为彩色的
+			</p>
+			<p>
+				5. <b>historyApiFallback</b>在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
+			</p>
+			<p>
+				关于webpack-dev-server的自动刷新模式详见http://octman.com/blog/2015-10-24-webpack-dev-server/。目前使用的是在npm package.json使用
+				<pre>
+					<code>
+		"scripts": {
+			"start": "webpack-dev-server --inline"
+		}
+					</code>
+				</pre>
+				注：直接在控制台输入npm start即可(对于其他命令要在npm后面加run)
+			</p>
+			<p>参考博客：https://segmentfault.com/a/1190000003970448</p>
+			<p>http://www.jianshu.com/p/42e11515c10f#</p>
+
+		</div>
+		<div class="footer">Copyright © 2016 </div>
+	</div>
+</body> 
+</html>

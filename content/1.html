@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>title</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header"><h1>header</h1>
+			<div class="links">
+				<a href="../index.html" class="returnMain">首页</a>
+				<a href="#" class="pre">上一篇</a>
+				<a href="#" class="next">下一篇</a>
+			</div>
+		</div>
+		<div class="context">
+			<h1>安装webpack报错</h1>
+			<div>
+				安装webpack报一下错误：
+				npm ERR! Windows_NT 6.1.7601<br/>
+				npm ERR! argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "install" "webpack" "--save-dev"<br/>
+				npm ERR! node v4.4.7<br/>
+				npm ERR! npm  v3.10.9<br/>
+				npm ERR! code ENOSELF<br/>
+
+				npm ERR! Refusing to install webpack as a dependency of itself<br/>
+				npm ERR!<br/>
+				npm ERR! If you need help, you may report this error at:<br/>
+				npm ERR!     <https://github.com/npm/npm/issues><br/>
+
+				npm ERR! Please include the following file with any support request:<br/>
+				npm ERR!     H:\tmp\webpack\npm-debug.log<br/>
+				
+				<br/>
+				后来发现是在创建测试文件夹时取名为webpack,在用npm init 时用的是默认选项，所以在package.json里面的name也为webpack，
+				换个名字即可解决。
+
+			</div>
+
+		</div>
+		<div class="footer">Copyright © 2016 </div>
+	</div>
+</body> 
+</html>
