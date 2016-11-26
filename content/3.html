@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS实现保持长宽比</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header"><h1>CSS实现保持长宽比</h1>
+			<div class="links">
+				<a href="../index.html" class="returnMain">首页</a>
+				<a href="#" class="pre">上一篇</a>
+				<a href="#" class="next">下一篇</a>
+			</div>
+		</div>
+		<div class="context">
+			<p> &nbsp;&nbsp; 看相关前端面试题时，看到了用css实现元素在视口大小发生变化时保持长宽成比例，看了下有点涨姿势的感觉，也算是是一种小技巧吧</p>
+			 &nbsp;&nbsp; 先上代码：
+			<pre>
+				<code>
+		&lt;div&gt;
+			&lt;div class="list"&gt;list1&lt;/div&gt;
+			&lt;div class="list"&gt;list2&lt;/div&gt;
+			&lt;div class="list"&gt;list3&lt;/div&gt;
+			&lt;div class="list"&gt;list4&lt;/div&gt;
+		&lt;/div&gt;
+				</code>
+			</pre>
+			<pre>
+				<code>
+		css:
+			.list{
+				float: left;
+				width: 25%;
+				margin: 10px 2%;
+				height: 0;
+				padding-bottom: 25%;
+				background-color: #dbe0e4;
+			}
+				</code>
+			
+			</pre>
+			&nbsp;&nbsp;大体上的思路是：一个元素的padding设为百分比时是相对于父元素的（padding-top，padding-bottom，padding-left ， padding-right），将height设为0，则元素的height就等于padding-bottom的值，而宽度设为百分比时也是相对于父元素的，所以利用这层关系，便可以设置宽高的比例。
+			<br>注：当overflow设置为hidden时也不影响height的值，因为计算overflow时的区域是包含padding和content的长度的，所以当content溢出到padding也能显示。
+			<br><br>
+			<p>参考博客：</p>
+			<p>http://zihua.li/2013/12/keep-height-relevant-to-width-using-css/</p>
+			<p>http://www.cnblogs.com/0603ljx/p/4650730.html</p>
+
+		</div>
+		<div class="footer">Copyright © 2016 </div>
+	</div>
+</body> 
+</html>
