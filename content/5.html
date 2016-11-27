@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3动画相关</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header"><h1>css3动画相关</h1>
+			<div class="links">
+				<a href="../index.html" class="returnMain">首页</a>
+				<a href="4.html" class="pre">上一篇</a>
+				<a href="6.html" class="next">下一篇</a>
+			</div>
+		</div>
+		<div class="context">
+			<p> &nbsp;&nbsp; 一直对css3的动画的各种效果没有一个清晰的思路，今天就大体的总结下（PS：只是各种属性的介绍，demo和代码暂无，因为暂时还没好的想法来实现在页面中更好的嵌入代码和图片）</p>
+			 <div>
+			 	<i><strong>（一）CSS3变形动画</strong></i>
+			 	&nbsp;&nbsp; 在CSS3中，提供可一个transform属性来实现变形动画的设计，它可以应用于任何的内联和块级元素。transform属性的各种动画函数如下:
+			 	<ul style="margin-left:35px;margin-top: 10px;">
+			 		<li>rotate()函数</li>
+			 		<li>scale()函数</li>
+			 		<li>translate()函数</li>
+			 		<li>skew()函数</li>
+			 		<li>matrix()函数</li>
+			 		
+			 	</ul>
+			 	<div style="margin-left: 15px">
+			 		<p><strong>rotate()</strong>函数用来将某个元素对象按照指定的角度进行顺时针旋转。接收一个角度的参数值，用来指定旋转的幅度。</p>
+			 		<p><strong>scale()</strong>函数用来将某个元素对象按照指定的缩放比例进行缩放。接收一个或者两个参数，分别宽和高的缩放比例。</p>
+			 		<p><strong>translate()</strong>函数用来将某个元素对象移动到指定的坐标位置。接收两个参数，分别表示元素对象移动位置相对于原来位置的横坐标位移量和纵坐标位置位移量，其中参数值为正数时，向右或者向下移动，否则向左或向上。</p>
+			 		<p><strong>skew()</strong>函数用来将元素对象按指定的角度进行倾斜。接收两个参数，分别表示相对于X轴的倾斜角度和相对于Y轴的倾斜角度，与rotate不同的是，skew()不仅是旋转，还会改变元素对象本身的形状。</p>
+			 		<p><strong>matrix()</strong>函数比较复杂,详见: 	<a href="http://www.zhangxinxu.com/wordpress/2012/06/css3-transform-matrix-%E7%9F%A9%E9%98%B5/">理解CSS3 transform中的Matrix(矩阵)</a></p>
+
+			 	</div>
+			 </div>
+			<div>
+			 	<i><strong>（二）CSS3过渡动画</strong></i>
+			 	&nbsp;&nbsp; css3的transition允许css的属性值在一定的时间区间内平滑地过渡。这种效果可以在鼠标单击、获得焦点、被点击或对元素任何改变中触发，并平滑地以动画效果改变css的属性值。transition属性的各种动画函数如下:
+			 	<ul style="margin-left:35px;margin-top: 10px;">
+			 		<li>transition</li>
+			 		<li>transition-propetry</li>
+			 		<li>transition-duration</li>
+			 		<li>transition-delay</li>
+			 		<li>transition-timing-function</li>
+			 		
+			 	</ul>
+			 	<div style="margin-left: 15px">
+			 		<p><strong>transition</strong>复合属性，包含下列属性</p>
+			 		<p><strong>transition-propetry</strong>属性用来定义要实现过渡动画的对象元素属性</p>
+			 		<p><strong>transition-duration</strong>属性主要用来设置一个属性过渡到另一个属性所需的时间</p>
+			 		<p><strong>transition-delay</strong>主要用来指定一个动画开始执行的时间，也就是说当改变元素属性值后多长时间开始执行</p>
+			 		<p><strong>transition-timing-function</strong>属性指的是过渡的“缓动函数”。主要用来指定浏览器的过渡速度，以及过渡期间的操作进展情况。</p>
+			 	</div>
+			 </div>
+			 <div>
+			 	<i><strong>（三）CSS3高级动画</strong></i>
+			 	&nbsp;&nbsp; css3的animation属性如下:
+			 	<ul style="margin-left:35px;margin-top: 10px;">
+			 		<li>animation-name</li>
+			 		<li>animation-duration</li>
+			 		<li>animation-delay</li>
+			 		<li>animation-iteration-count</li>
+			 		<li>animation-direction</li>
+			 		<li>animation-play-state</li>
+			 		<li>animation-fill-mode</li>
+			 		<li>animation-timing-function</li>
+			 		
+			 	</ul>
+			 	<div style="margin-left: 15px">
+			 		<p><strong>animation-name</strong>主要用来调用@keyframes定义好的动画，需要特别注意：animation-name调用的动画名需要和"@keyframes“定义的动画名称完全一致（区分大小写）</p>
+			 		<p><strong>animation-duration</strong>主要用来设置CSS3动画播放时间，其使用方法和transition-duration类似，是用来指定元素播放动画所持续的时间长，也就是完成从0%到100%一次动画所需的时间</p>
+			 		<p><strong>animation-delay</strong>属性用来定义动画开始播放的时间，用来触发动画播放的时间点。和transition-delay属性一样，用于定义在浏览器开始执行动画之前等待的时间。</p>
+			 		<p><strong>animation-iteration-count</strong>主要用来定义动画的播放次数，其通常为整数，单页可以为小数，其默认值为1，这意味着动画将从开始到结束只播放一次；如果取值为infinite，动画将无限次的播放。</p>
+			 		<p><strong>animation-direction</strong>属性主要用来设置动画播放方向，其主要有两个值：normal、alternate.normal是默认值，如果设置为normal时，动画每次循环都是向前播放,另一个是alternate，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放</p>
+			 		<p><strong>animation-play-state</strong>属性是用来控制元素动画的播放状态。其主要有两个值：running和paused。其中running是其默认值，可以通过该值将暂停的动画重新比方，这里的重新播放不一定是从元素动画的开始播放，而是从暂定的那个位置开始播放。如果暂定了动画的播放。元素的样式将回到最原始设置状态</p>
+			 		<p><strong>animation-fill-mode</strong>属性定义在动画开始之前和结束之后发生的操作。主要具有四个属性值：none、forwards、backwords和both。</p>
+			 		<p><strong>animation-timing-function</strong>主要用来设置动画播放方式。主要让元素根据时间的推进来改变属性的变换速率，就是动画的播放方式。它和transition中的transition-timing-function 中的值一样</p>
+			 	</div>
+			 </div>
+
+
+
+
+
+
+			<pre>
+				<code>
+		&lt;style type="text/css"&gt;
+			@keyframes 'changeit' {
+				0% {
+					transform:rotate(0deg)
+				}
+				40% {
+					transform:rotate(60deg)
+				}
+				100% {
+					transform:rotate(100deg)
+				}
+			}
+			img:hover{
+				animation-name:changeit;
+				animation-duration:10s;
+			}
+		&lt;style&gt;
+				</code>
+			</pre>
+			
+			<br><br>
+			<p>参考博客：</p>
+			<p>http://blog.csdn.net/charlene0824/article/details/50705931</p>
+			
+
+		</div>
+		<div class="footer">Copyright © 2016 </div>
+	</div>
+</body> 
+</html>
