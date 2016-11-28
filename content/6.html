@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css实现一个三角形</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header"><h1>css实现一个三角形</h1>
+			<div class="links">
+				<a href="../index.html" class="returnMain">首页</a>
+				<a href="5.html" class="pre">上一篇</a>
+				<a href="7.html" class="next">下一篇</a>
+			</div>
+		</div>
+		<div class="context">
+			<p> &nbsp;&nbsp; 以前画三角形一直用的border属性，今天看了一些面试题才想起来还有其他的一些方式，总结下，说说几种比较好理解的方式吧</p>
+			<div>
+				<i><strong>（一）利用border属性</strong></i>
+				<br>实现如下：
+			<pre>
+				<code>
+		.triangle{
+	    		width:0;
+			height:0;
+			border-width:20px;
+			border-style:solid dashed dashed dashed;  
+			/* IE6下把边框设置成 transparent 时会出现黑影，并不会透明，把 border-style 设置成 dashed 可以解决。 */
+			border-color:#e66161 transparent transparent transparent;
+		}
+
+				</code>
+			</pre>
+			</div>
+			<div>
+				<i><strong>（二）利用 CSS3 transfrom 旋转 45 度实现三角形</strong></i>
+				<br>先创建一个带 border 的 div ，设置好背景色和相邻的两个边框的颜色，然后旋转 45 度
+			<pre>
+				<code>
+		&lt;div class="containerBox"&gt;
+			&lt;div class="rotateTriangle transform ie-transform-filter"&gt;list1&lt;/div&gt;
+		&lt;/div&gt;
+		.containerBox{
+			position:relative;
+			width:240px;
+			height:60px;
+			line-height:60px;
+			background:#E9FBE4;
+			box-shadow:1px 2px 3px #E9FBE4;
+			border:1px solid #C9E9C0;
+			border-radius:4px;
+			text-align:center;
+			color:#0C7823;
+		}
+		.rotateTriangle{
+			position:absolute;
+			bottom:-8px;
+			bottom:-6px;
+			left:30px;
+			overflow:hidden;
+			width:13px;
+			height:13px;
+			background:#E9FBE4;
+			border-bottom:1px solid #C9E9C0;
+			border-right:1px solid #C9E9C0;
+		}
+		.transform {
+			-webkit-transform:rotate(45deg);
+			-moz-transform:rotate(45deg);
+			-o-transform:rotate(45deg);
+			transform:rotate(45deg);
+		}
+		/*ie7-9*/
+		.ie-transform-filter {
+		    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865475,M12=-0.7071067811865477,M21=0.7071067811865477,M22=0.7071067811865475,SizingMethod='auto expand')";
+		    filter: progid:DXImageTransform.Microsoft.Matrix(
+		        M11=0.7071067811865475,
+		        M12=-0.7071067811865477,
+		        M21=0.7071067811865477,
+		        M22=0.7071067811865475,
+		       SizingMethod='auto expand');
+		}
+				</code>
+			</pre>
+			</div>
+			<div>
+				<i><strong>（三）利用 HTML5的canvas实现</strong></i>
+				<br>代码如下:
+				<pre>
+				<code>
+		var canvas = document.getElementById('triangle');
+		var context = canvas.getContext('2d');
+		context.beginPath();
+		context.moveTo(0, 0);
+		context.lineTo(100, 0);
+		context.lineTo(50, 100);
+		context.closePath();
+		context.fillStyle = "rgb(78, 193, 243)";
+		context.fill();
+				</code>
+			</pre>
+			</div>
+			
+			<br><br>
+			<p>参考博客：</p>
+			<p>http://blog.csdn.net/huanghui8030/article/details/16984933</p>
+			<p>http://www.daqianduan.com/4721.html</p>
+
+		</div>
+		<div class="footer">Copyright © 2016 </div>
+	</div>
+</body> 
+</html>
